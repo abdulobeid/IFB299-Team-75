@@ -19,7 +19,7 @@ if(!get_magic_quotes_gpc())
 }
 
 if(move_uploaded_file($_FILES['userfile']['tmp_name'], $target_file)) {
-	echo "The file ".  basename($_FILES['userfile']['name']). " has been uploaded";
+	echo "This file ".  basename($_FILES['userfile']['name']). " has been uploaded";
 } else {
 	echo "The file ".  basename($_FILES['userfile']['name']). " has not been uploaded";
 }
