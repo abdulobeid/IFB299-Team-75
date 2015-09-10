@@ -16,8 +16,15 @@ $query = "SELECT * FROM tableFiles" ;
 $queryresult = mysqli_query($conn, $query) or die('Error connecting to database') ;
 
 if(isset($_POST['delete'])){
-     $queryDelete = "DELETE FROM tableFiles WHERE columnID='$_POST[hidden]'";
-	 mysqli_query($conn, $queryDelete);
+    $queryDelete = "DELETE FROM tableFiles WHERE columnID='$_POST[hidden]'";
+	$filename = "/var/www/html/uploads/{$_POST[Name]}";
+	echo $filename;
+	if (unlink($filename)) {
+		mysqli_query($conn, $queryDelete);
+        echo 'File <strong>'.$filename.'</strong>has been deleted.';
+        } else {
+            echo 'File cannot be deleted.';
+        }
     }
 
 echo "<table>";
