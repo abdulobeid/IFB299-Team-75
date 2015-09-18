@@ -1,28 +1,37 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <meta charset="utf-8">
 <title>Media Vault</title>
+<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <link href="CSS/mainStyles.css" rel="stylesheet" type="text/css" />
 
-<img src="logo.jpg" alt='Logo'>
-
 </head>
-<body id = "gradient">
+<body>
 
-<table style="width:50%">
-	<tr>
-		<th><a>Main Page</a></th>
-	</tr>
-	<tr>
-		<th><a href="RegistrationFormSectionPHPStuff_AbdulKarimObeid/main.php">Sign Up</a></th>
-	</tr>
-	<tr>
-		<th><a href="formPopulate.php">Form Populate</a></th>
-	</tr>
-	<tr>
-		<th><a href="uploadTest.html">Upload</a></th>
-	</tr>
-</table>
+<div id="light" class="white_content">	<img id = 'popImage' src = '#' alt='error'></img><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+
+	</div>
+<div id="fade" class="black_overlay"></div>
+
+	<div id="_wrapper">
+		<div id="_div_HDR">
+			<div id="_div_HDR_HDR">
+				<img id="_div_HDR_IMG" src="images/mediaVLogo.png">Media Vault 
+			</div>
+		</div>
+		
+		<div id="_div_CTT">
+		<iframe id="_div_CTT_MNN" src="login_form.php"></iframe>
+		</div>
+
+		<div id="_div_FTR">
+		Presented to you by Abdul Karim Obeid, Thomas Fielder, Mohammed I Huq, David Arthy, Joseph Scanlon & Robert Piper
+		</div>
+	</div>
 </body>
 </html>
