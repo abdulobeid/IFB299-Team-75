@@ -1,0 +1,6 @@
+fileForm.php - Cleaned up code and created the view in browser html and javascript
+index.html - Added the view in browser html and worked on original index
+mainStyles.css - Added some css for the webpage
+upload.php - worked on file uploading
+upload_form.php - worked on file uploading
+uploadTest - worked on file uploading
