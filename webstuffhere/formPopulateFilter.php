@@ -28,9 +28,15 @@ $retainFilterYY = "";
 $queryStandIn = " WHERE ";
 
 if(isset($_SESSION["userID"])){
-    $queryAdd = $queryAdd . $queryStandIn . "userID = ".$_SESSION["userID"];
+	if ($_SESSION["userID"] == 35) {
+		//$queryAdd = $queryAdd . $queryStandIn . "userID = %";
+	} else {
+		$queryAdd = $queryAdd . $queryStandIn . "userID = ".$_SESSION["userID"];
+		$queryStandIn = " AND ";
+	}
+    
     //$retainFilterYY = $filterYYTXT;
-    $queryStandIn = " AND ";
+    
 }    
 
 if(isset($_POST['filterType']) && htmlspecialchars($_POST['filterType']) != "8"){
@@ -227,7 +233,7 @@ while ($row = mysqli_fetch_array($queryresult)) {
             case 8 : $tagColor =  'NONE'; break ;
         }
 	
-	echo '<div id="_div_FLE_TAG_'.$tagColor.'" > </div>';
+	echo '<div id="_div_FLE_TAG_'.$tagColor.'" > </div><p>';
 	echo $cStr;
 	echo "</form>";
 	echo '</div>';
@@ -238,6 +244,7 @@ while ($row = mysqli_fetch_array($queryresult)) {
 	$arrayFileTimes[$ticker] = $row['columnCreated'];
 	$arrayFileColrs[$ticker] = $row['columnType'];
 	$arrayFileRName[$ticker] = $row['columnFileURL'];
+	$arrayFileUser[$ticker] = $row['userID'];
 }
 
 echo '</div>';
@@ -284,6 +291,7 @@ var IDS = [];
 	var Colrs = [];
 	var Tickers = [];
 	var RNames = [];
+	var Users = [];
 	
 	var a = <?php echo $ticker; ?>;
 	<?php $ticker2 = 0; 
@@ -296,6 +304,7 @@ var IDS = [];
 		Times[<?php echo $i?>] = <?php echo "'".$arrayFileTimes[$ticker2]."';"; ?>
 		Colrs[<?php echo $i?>] = <?php echo "'".$arrayFileColrs[$ticker2]."';"; ?>
 		RNames[<?php echo $i?>] = <?php echo "'".$arrayFileRName[$ticker2]."';"; ?> 
+		Users[<?php echo $i?>] = <?php echo "'".$arrayFileUser[$ticker2]."';"; ?>
 	<?php } ?>
 	
 
@@ -308,7 +317,7 @@ function mouseClickFile(item) {
 		b = true;
 		 document.getElementsByName(item)[0].id = "_div_FLE_2";
 		 selected = item;
-		 parent.launchFileForm(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected]);
+		 parent.launchFileForm(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected],Users[selected]);
 	} else {
 		if (b == true) {
 			b = false;
@@ -361,7 +370,7 @@ function setFileSel(selectedI) {
 	document.getElementsByName(selectedI)[0].id = "_div_FLE_2";
 	selected = selectedI;
 	
-	parent.reloadFileForm(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected]);
+	parent.reloadFileForm(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected],Users[selected]);
 }
 </script> 
 

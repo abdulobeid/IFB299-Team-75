@@ -13,9 +13,12 @@
 </head>
 <body>
 
-<div id="light" class="white_content">	<img id = 'popImage' src = '#' alt='error'></img><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
-
-	</div>
+<div id="light" class="white_content">	
+	<img id = 'popImage' src = '' alt=''></img>
+	<video id = 'popVideo' alt = '' controls>
+	</video>
+	<a href = "javascript:void(0)" onclick = "document.getElementById('popVideo').src = '';document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none';">Close</a>
+</div>
 <div id="fade" class="black_overlay"></div>
 
 	<div id="_wrapper">

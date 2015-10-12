@@ -222,11 +222,11 @@ if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileTy
 		if (document.getElementById("ATT_TYP").innerHTML == "\".jpg\" file type" || document.getElementById("ATT_TYP").innerHTML == "\".png\" file type" || document.getElementById("ATT_TYP").innerHTML == "\".gif\" file type" 
 			|| document.getElementById("ATT_TYP").innerHTML == "\".jpeg\" file type" || document.getElementById("ATT_TYP").innerHTML == "\".bmp\" file type"){
 			console.log("This is an image");
-			window.top.document.getElementById("popImage").src = (fileId2.value);
+			window.top.document.getElementById("popImage").src = (document.getElementById("fileId2").value);
 			Show('Image');
 		} else if (document.getElementById("ATT_TYP").innerHTML == "\".mp4\" file type") {
 			console.log("This is an video");
-			window.top.document.getElementById("popVideo").src = (fileId2.value);
+			window.top.document.getElementById("popVideo").src = (document.getElementById("fileId2").value);
 			Show('Video');
 		} else {
 			Show('Blank');	

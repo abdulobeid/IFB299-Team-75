@@ -70,8 +70,12 @@
 					<div id="_div_BBL">
 					<p>
 					Welcome '.$_SESSION["username"].'
-					</p>
-					<p>
+					</p>';
+						if(isset($_SESSION["userID"]) && $_SESSION["userID"] == 35){ 
+							echo '<p> <input id="_inp_BTN" type="button" value="User Browser" onclick="UserFrame();"> </p>'; 
+							}
+					echo 
+					'<p>
 					<input id="_inp_BTN" type="button" value="Upload a File" onclick="UploadFrame();">
 					</p>
 					<p>
@@ -120,8 +124,15 @@ var filterFLE = "NNE";
 var attIDS = "";
 var attSelFile = "-1";
 var attRName = "";
+var attUser = "";
+
+var attuSelUser = "";
+var attuIDS = "";
+var attuUser = "";
+var attuName = "";
+var attuEmail = "";
  
-function launchFileForm(Tickers,IDS,Name,Type,Time,Colr,RName){ 
+function launchFileForm(Tickers,IDS,Name,Type,Time,Colr,RName,User){ 
 	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" onload=setFileForm() src="fileForm.php"></iframe>';
 	attIDS = IDS;
 	attName = Name;
@@ -130,9 +141,20 @@ function launchFileForm(Tickers,IDS,Name,Type,Time,Colr,RName){
 	attColr = Colr;
 	attSelFile = Tickers;
 	attRName = RName;
+	attUser = User;
  }
  
- function reloadFileForm(Tickers,IDS,Name,Type,Time,Colr,RName){ 
+function launchUserForm(Tickers,IDS,UserNames,UserFullNames,UserEmails){ 
+	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" onload=setUserForm() src="userForm.php"></iframe>';
+	attuSelUser = Tickers;
+	attuIDS = IDS;
+	attuUser = UserNames;
+	attuName = UserFullNames;
+	attuEmail = UserEmails;
+ }
+ 
+ 
+ function reloadFileForm(Tickers,IDS,Name,Type,Time,Colr,RName,User){ 
 	//document.getElementById("_div_CTT_RGT").contentWindow.location.reload();
 	attIDS = IDS;
 	attName = Name;
@@ -141,14 +163,30 @@ function launchFileForm(Tickers,IDS,Name,Type,Time,Colr,RName){
 	attColr = Colr; 
 	attSelFile = Tickers;
 	attRName = RName;
-	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName);
+	attUser = User;
+	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName,attUser);
+ }
+ 
+  function reloadUserForm(Tickers,IDS,UserNames,UserFullNames,UserEmails){ 
+	//document.getElementById("_div_CTT_RGT").contentWindow.location.reload();
+	attuSelUser = Tickers;
+	attuIDS = IDS;
+	attuUser = UserNames;
+	attuName = UserFullNames;
+	attuEmail = UserEmails;
+	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attuIDS,attuUser,attuName,attuEmail);
  }
  
  function setFileForm(){ 
 	document.getElementById("_div_CTT_MID").contentWindow.setFileSel(attSelFile);
-	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName);
+	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName,attUser);
  }
  
+  function setUserForm(){ 
+	document.getElementById("_div_CTT_MID").contentWindow.setUserSel(attuSelUser);
+	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attuIDS,attuUser,attuName,attuEmail);
+	
+ }
 
   // Filter stuff
  function sendParameters(filterDD,filterMM,filterYYYY,filterTXT,filterFLE,filterCOL) {
@@ -161,10 +199,15 @@ function launchFilterForm() {
  
  function updateFileStuff(fileI) {
 	 document.getElementById("_div_CTT_MID").contentWindow.location.reload();
-	 document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName);
+	 document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName,attUser);
  }
  
-  function updateFileFormStuff(Tickers,IDS,Name,Type,Time,Colr,RName) {
+ function updateUserStuff(userI) {
+	 document.getElementById("_div_CTT_MID").contentWindow.location.reload();
+	 document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attuIDS,attuUser,attuName,attuEmail);
+ }
+ 
+  function updateFileFormStuff(Tickers,IDS,Name,Type,Time,Colr,RName,User) {
 	attIDS = IDS;
 	attName = Name;
 	attType = Type;
@@ -172,11 +215,16 @@ function launchFilterForm() {
 	attColr = Colr;
 	attSelFile = Tickers;
 	attRName = RName;
-	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName);
+	attUser = User;
+	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName,attUser);
  }
  
  function UploadFrame() {
- document.getElementById("_div_BBM").innerHTML = '<p>My Files</p> <iframe id="_div_CTT_MID" src="upload_form.php"></iframe>';
+ document.getElementById("_div_BBM").innerHTML = '<p>Upload a File</p> <iframe id="_div_CTT_MID" src="upload_form.php"></iframe>';
+ }
+ 
+ function UserFrame() {
+ document.getElementById("_div_BBM").innerHTML = '<p>User Browser</p> <iframe id="_div_CTT_MID" src="formPopulateFilterUsers.php"></iframe>';
  }
  
  function alertReload() {

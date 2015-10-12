@@ -11,42 +11,25 @@ include("connect.php");
 
 $conn = db_connect();
 
-if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileType'])) {
+if (isset($_POST['userName']) && isset($_POST['userFullName']) && isset($_POST['userEmail'])) {
 
-	$sql = "UPDATE tableFiles SET columnName='".$_POST['fileName']."' WHERE columnID=".$_POST['fileID'];
+	$sql = "UPDATE tableUsers SET columnUsername='".$_POST['userName']."' WHERE columnID=".$_POST['userID'];
 
-	if ($conn->query($sql) === TRUE) {
-		//echo "Record updated successfully";
-	} else {
-		//echo "Error updating record: " . $conn->error;
-	}
+	if ($conn->query($sql) === TRUE) {} else {}
 
-	$sql = "UPDATE tableFiles SET columnType='".$_POST['fileType']."' WHERE columnID=".$_POST['fileID'];
+	$sql = "UPDATE tableUsers SET columnFullName='".$_POST['userFullName']."' WHERE columnID=".$_POST['userID'];
 
-	if ($conn->query($sql) === TRUE) {
-		//echo "Record updated successfully";
-	} else {
-		//echo "Error updating record: " . $conn->error;
-	}
+	if ($conn->query($sql) === TRUE) {} else {}
+	
+	$sql = "UPDATE tableUsers SET columnEmail='".$_POST['userEmail']."' WHERE columnID=".$_POST['userID'];
+
+	if ($conn->query($sql) === TRUE) {} else {}
 	
 	echo '<script type="text/javascript">'
-	   , 'parent.updateFileStuff();'
+	   , 'parent.updateUserStuff();'
 	   , '</script>'
 	;
 }
-	//header("Refresh:0");
-	
-	/*if(isset($_POST['delete'])){
-    $queryDelete = "DELETE FROM tableFiles WHERE columnID=".$_POST['fileID'];
-	$filename = "/var/www/html/uploads/{$_POST['fileName']}";
-	echo $filename;
-	if (unlink($filename)) {
-		mysqli_query($conn, $queryDelete);
-        echo 'File <strong>'.$filename.'</strong>has been deleted.';
-        } else {
-            echo 'File cannot be deleted.';
-        }
-    }*/
 
 ?>
 
@@ -63,62 +46,38 @@ if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileTy
 <div id="_div_BBR_IFR">
 
 	<p>
-	File Details 
+		User Editing
 	</p>
-	
+	<form id="fileForm" action=userForm.php method=post>
 	<div id="_div_FTR_BOX">
-		Filename: <attributeThing id="ATT_NME"> </attributeThing>
-	<p>
-		File Type: <attributeThing id="ATT_TYP"> </attributeThing>
-	<p>
-		Date Added: <attributeThing id="ATT_DTE"> </attributeThing>
-		<?php
-		if(isset($_SESSION["userID"]) && $_SESSION["userID"] == 35){ echo '
-	<p>
-		Attached User: <attributeThing id="ATT_USR"> </attributeThing>'; }?>
-	<br>
-	</div>
-	<div id="_div_FTR_BOX_VEW">
-		<input id="_inp_BTN_2" type="submit" onclick= "clicked()" value="View Online">  
-		<input id="_inp_BTN_2" type="submit" onclick=downloadStuff() value="Download">
-	</div>
-	<p>
-		File Editing
-	</p>
-	<form id="fileForm" action=fileForm.php method=post>
-	<div id="_div_FTR_BOX">
-		Update Filename:
+		Update Username:
 		<p>
-		<input name="fileName" id="_inp_TXT_2">
+		<input name="userName" id="_inp_TXT_2">
 	</div>
 	
 	<div id="_div_FTR_BOX">
-		Update File Color Tag:<p>
-	
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_RED"  onclick="tagColSet('0',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_ORANGE" onclick="tagColSet('1',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_YELLOW" onclick="tagColSet('2',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_GREEN" onclick="tagColSet('3',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_AQUA" onclick="tagColSet('4',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_NAVY" onclick="tagColSet('5',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_PURPLE" onclick="tagColSet('6',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_PINK" onclick="tagColSet('7',this)"></div>
-		<div name="INP_COL" class="_SEL" id="_inp_TAG_NONE" onclick="tagColSet('8',this)"></div>
-		<br><br>
+		Update Full Name:
+		<p>
+		<input name="userFullName" id="_inp_TXT_3">
 	</div>
 	
+	<div id="_div_FTR_BOX">
+		Update Email:
+		<p>
+		<input name="userEmail" id="_inp_TXT_4">
+	</div>
 	
-	<input type="hidden" name="fileID" >
+	<input type="hidden" name="userID" >
 	
 	<input type="hidden" name="fileType" >
-	<input id="_inp_BTN_2" type="submit" value="Save Details"></form>
+	<input id="_inp_BTN_2" type="submit" value="Save Details">
+	</form>
 	<div id = 'fileId2'></div>	
 	
-	<form id="deleteForm" action=deleteFile.php method=post>
-	<input name="fle_NME" type="hidden">
-	<input name="fle_IDS" type="hidden">
-	<input name="fle_ACT" type="hidden">
-	<input id="_inp_BTN_DELETE" type="submit" onclick=deleteConfirmation() value="Delete File">
+	<form id="deleteForm" action=deleteUser.php method=post>
+	<input name="usr_IDS" type="hidden">
+	<input name="usr_ACT" type="hidden">
+	<input id="_inp_BTN_DELETE" type="submit" onclick=deleteConfirmation() value="Delete User">
 	</form>
 	</div>
 	<iframe id="my_iframe" style="display:none;"></iframe>
@@ -144,30 +103,21 @@ if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileTy
 	}
 	
 	function deleteConfirmation() {
-		if (confirm("Confirm that you wish to delete this file")) {
+		if (confirm("Confirm that you wish to delete this user")) {
 			document.deleteForm.submit();
-			document.getElementsByName("fle_ACT")[0].value = "yes";
+			document.getElementsByName("usr_ACT")[0].value = "yes";
 		} else {
-			document.getElementsByName("fle_ACT")[0].value = "no";
+			document.getElementsByName("usr_ACT")[0].value = "no";
 		}
 	}
-
-	function setAttributesOf(IDS,Name,Type,Time,Colr,Rname,User) {
-		document.getElementById("ATT_NME").innerHTML = Name;
-		document.getElementById("ATT_TYP").innerHTML = Type;
-		document.getElementById("ATT_DTE").innerHTML = Time;
-		document.getElementById("ATT_USR").innerHTML = UserNames[User];
+	
+	function setAttributesOf(attuIDS,attuUser,attuName,attuEmail) {
+		document.getElementById("_inp_TXT_2").value = attuUser;
+		document.getElementById("_inp_TXT_3").value = attuName;
+		document.getElementById("_inp_TXT_4").value = attuEmail;
+		document.getElementsByName("userID")[0].value = attuIDS;
 		
-		document.getElementById("_inp_TXT_2").value = Name;
-		document.getElementsByName("fileID")[0].value = IDS;
-
-		document.getElementById("fileId2").value = Rname;
-
-		document.getElementsByName("fle_IDS")[0].value = IDS;
-		document.getElementsByName("fle_NME")[0].value = Rname;
-		FLE_NME_TAKE = Rname;
-		document.getElementsByName("fileType")[0].value = Colr;
-		tagColSetDifferent(Colr);
+		document.getElementsByName("usr_IDS")[0].value = attuIDS;
 	}
 
 	function tagColSetDifferent(col) { 
@@ -195,13 +145,15 @@ if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileTy
 	function clicked(){
 		// Reset the content div
 		window.top.document.getElementById("popImage").src = ("");
+
+		
 		
 		// Write values to console for testing purposes
 		console.log(document.getElementById("ATT_TYP").innerHTML);
 		console.log(document.getElementById("ATT_NME").innerHTML);
 		console.log(document.getElementById("ATT_DTE").innerHTML);
 		console.log(document.getElementById("_inp_TXT_2").value);
-		console.log(document.getElementsByName("fileID")[0].value);
+		console.log(document.getElementsByName("userID")[0].value);
 		console.log(document.getElementsByName("fileType")[0].value);
 
 		// window.top references the top level of the iframe which is index.html
