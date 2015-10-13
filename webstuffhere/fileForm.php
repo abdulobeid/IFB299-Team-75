@@ -156,17 +156,14 @@ if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileTy
 		document.getElementById("ATT_NME").innerHTML = Name;
 		document.getElementById("ATT_TYP").innerHTML = Type;
 		document.getElementById("ATT_DTE").innerHTML = Time;
-		document.getElementById("ATT_USR").innerHTML = UserNames[User];
-		
 		document.getElementById("_inp_TXT_2").value = Name;
 		document.getElementsByName("fileID")[0].value = IDS;
-
 		document.getElementById("fileId2").value = Rname;
-
 		document.getElementsByName("fle_IDS")[0].value = IDS;
 		document.getElementsByName("fle_NME")[0].value = Rname;
-		FLE_NME_TAKE = Rname;
 		document.getElementsByName("fileType")[0].value = Colr;
+		FLE_NME_TAKE = Rname;
+		document.getElementById("ATT_USR").innerHTML = User;
 		tagColSetDifferent(Colr);
 	}
 
