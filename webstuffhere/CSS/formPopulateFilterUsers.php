@@ -136,7 +136,7 @@ function mouseClickFile(item) {
 				document.getElementsByName(i)[0].id = "_div_FLE";
 			}
 			selected = -1;
-			parent.launchNothingForm();
+			parent.launchFilterForm();
 		}
 	}
 }
@@ -172,8 +172,6 @@ function setUserSel(selectedI) {
 	
 	parent.reloadUserForm(Tickers[selected],IDS[selected],UserNames[selected],UserFullNames[selected],UserEmails[selected]);
 }
-
-
 </script> 
 
 </body>

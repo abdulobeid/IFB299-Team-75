@@ -74,15 +74,14 @@
 							
 					echo 
 					'
-					
 					<input id="_inp_BTN" type="button" value="Upload a File" onclick="UploadFrame();">
 					<input id="_inp_BTN" type="button" value="File Browser" onclick="changeToFileBrowser();">
-					<input id="_inp_BTN" type="button" value="News Feed" onclick="NewsFeedFrame();">
+					<input id="_inp_BTN" type="button" value="News Feed" onclick="alertNotYet();">
 					<input id="_inp_BTN" type="button" value="Friends" onclick="FriendsFrame();">
 					<input id="_inp_BTN" type="button" value="Settings" onclick="alertNotYet();">
-					<form action="logout.php">
-					<input id="_inp_BTN_L" type="submit" value="Log Out"></form>
-					</div> 
+					<input id="_inp_BTN" type="submit" value="Log Out">'.
+					//<form action="logout.php"></form>
+					'</div> 
 					
 					<div id="_div_BBM">
 						<p>
@@ -118,35 +117,6 @@ var attuIDS = "";
 var attuUser = "";
 var attuName = "";
 var attuEmail = "";
-
-function launchFileFormIns(Tickers,IDS,Name,Type,Time,Colr,RName,User){ 
-	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" onload=setFileForm() src="fileFormIns.php"></iframe>';
-	attIDS = IDS;
-	attName = Name;
-	attType = Type;
-	attTime = Time;
-	attColr = Colr;
-	attSelFile = Tickers;
-	attRName = RName;
-	attUser = User;
- }
-
- function reloadFileFormIns(Tickers,IDS,Name,Type,Time,Colr,RName,User){ 
-	attIDS = IDS;
-	attName = Name;
-	attType = Type;
-	attTime = Time;
-	attColr = Colr; 
-	attSelFile = Tickers;
-	attRName = RName;
-	attUser = User;
-	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attIDS,attName,attType,attTime,attColr,attRName,attUser);
- }
-
-
-
-
-
  
 function launchFileForm(Tickers,IDS,Name,Type,Time,Colr,RName,User){ 
 	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" onload=setFileForm() src="fileForm.php"></iframe>';
@@ -162,15 +132,6 @@ function launchFileForm(Tickers,IDS,Name,Type,Time,Colr,RName,User){
  
 function launchUserForm(Tickers,IDS,UserNames,UserFullNames,UserEmails){ 
 	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" onload=setUserForm() src="userForm.php"></iframe>';
-	attuSelUser = Tickers;
-	attuIDS = IDS;
-	attuUser = UserNames;
-	attuName = UserFullNames;
-	attuEmail = UserEmails;
- }
- 
- function launchFriendForm(Tickers,IDS,UserNames,UserFullNames,UserEmails){ 
-	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" onload=setFriendForm() src="friendFocusForm.php"></iframe>';
 	attuSelUser = Tickers;
 	attuIDS = IDS;
 	attuUser = UserNames;
@@ -212,12 +173,6 @@ function launchUserForm(Tickers,IDS,UserNames,UserFullNames,UserEmails){
 	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attuIDS,attuUser,attuName,attuEmail);
 	
  }
- 
- function setFriendForm(){ 
-	document.getElementById("_div_CTT_MID").contentWindow.setUserSel(attuSelUser);
-	document.getElementById("_div_CTT_RGT").contentWindow.setAttributesOf(attuIDS,attuUser,attuName,attuEmail);
-	
- }
 
   // Filter stuff
  function sendParameters(filterDD,filterMM,filterYYYY,filterTXT,filterFLE,filterCOL) {
@@ -226,9 +181,6 @@ function launchUserForm(Tickers,IDS,UserNames,UserFullNames,UserEmails){
  
 function launchFilterForm() { 
 	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" src="filterForm.php"></iframe>';
- }
- function launchNothingForm() { 
-	document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" src="nothing.php"></iframe>';
  }
  
  function launchFriendAddForm() { 
@@ -260,12 +212,6 @@ function launchFilterForm() {
  
  function UploadFrame() {
  document.getElementById("_div_BBM").innerHTML = '<p>Upload a File</p> <iframe id="_div_CTT_MID" src="upload_form.php"></iframe>';
- document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" src="nothing.php"></iframe>';
- }
- 
- function NewsFeedFrame() {
- document.getElementById("_div_BBM").innerHTML = '<p>News Feed</p> <iframe id="_div_CTT_MID" src="formPopulateFilterNewsFeed.php"></iframe>';
-  document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" src="nothing.php"></iframe>';
  }
  
  function FriendsFrame() {
@@ -275,11 +221,6 @@ function launchFilterForm() {
  
  function UserFrame() {
  document.getElementById("_div_BBM").innerHTML = '<p>User Browser</p> <iframe id="_div_CTT_MID" src="formPopulateFilterUsers.php"></iframe>';
- document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" src="nothing.php"></iframe>';
- }
- 
-  function launchInsightUser() {
- document.getElementById("_div_BBM").innerHTML = "<p>Friend's Files</p> <iframe "+'id="_div_CTT_MID" src="formPopulateFilterInsight.php"></iframe>';
  document.getElementById("_div_BBR").innerHTML = '<iframe id="_div_CTT_RGT" src="filterForm.php"></iframe>';
  }
  
@@ -288,7 +229,7 @@ function launchFilterForm() {
  }
  
  function alertNotYet() {
-	 window.alert("This feature has not yet been implemented. Stick around for the third release hehe ;D");
+	 window.alert("This feature has not yet been implemented. Stick around for the second release.");
  }
  
  function changeToFileBrowser() {

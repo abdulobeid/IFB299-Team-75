@@ -23,19 +23,48 @@ $queryAdd = "";
 $queryStandIn = " WHERE ";
 
 
-$query = "SELECT * FROM tableUsers" . $queryAdd ;
+// Get the friends and store them in an array
+
+$tickerUserFind = 0;
+
+$query = "SELECT * FROM tableFriends WHERE columnUserID1 = " . $_SESSION["userID"];
+
+$queryresult = mysqli_query($conn, $query) or die('Error connecting to database1') ;
+
+while ($row = mysqli_fetch_array($queryresult)) {
+	$UserFriendCodes[$tickerUserFind] = $row['columnUserID2'];
+	$tickerUserFind ++;
+}
+
+$query = "SELECT * FROM tableFriends WHERE columnUserID2 = " . $_SESSION["userID"];
+
+$queryresult = mysqli_query($conn, $query) or die('Error connecting to database2') ;
+
+while ($row = mysqli_fetch_array($queryresult)) {
+	$UserFriendCodes[$tickerUserFind] = $row['columnUserID1'];
+	$tickerUserFind ++;
+}
+
+/*
+$query = "SELECT * FROM tableUsers WHERE " . $queryAdd ;
 
 $queryresult = mysqli_query($conn, $query) or die('Error connecting to database') ;
 
-    
+*/
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+$query = "SELECT * FROM tableUsers WHERE";
 
+$countUsers = count($UserFriendCodes);
 
+for ($i = 0; $i < $countUsers; $i ++) {
+	$query = $query . $queryAdd . " columnID = " . $UserFriendCodes[$i];
+	$queryAdd = " OR ";
+}
+if ($countUsers != 0) {
 
-
-
-
-
+$queryresult = mysqli_query($conn, $query) or die('Error connecting to database3'.$countUsers) ;
+}
 
 echo '<div id="_div_BBM_FLB" onmouseover="mouseOverFile('."'-1'".')"  onclick="mouseClickFile('."'-1'".')" >';
 
@@ -127,7 +156,7 @@ function mouseClickFile(item) {
 		b = true;
 		 document.getElementsByName(item)[0].id = "_div_FLE_2";
 		 selected = item;
-		 parent.launchUserForm(Tickers[selected],IDS[selected],UserNames[selected],UserFullNames[selected],UserEmails[selected]);
+		 parent.launchFriendForm(Tickers[selected],IDS[selected],UserNames[selected],UserFullNames[selected],UserEmails[selected]);
 	} else {
 		if (b == true) {
 			b = false;
@@ -136,7 +165,7 @@ function mouseClickFile(item) {
 				document.getElementsByName(i)[0].id = "_div_FLE";
 			}
 			selected = -1;
-			parent.launchNothingForm();
+			parent.launchFriendAddForm();
 		}
 	}
 }

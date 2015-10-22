@@ -20,18 +20,19 @@
         <h1>Recovery Form</h1>
         </p>
         <p>
-        Use this form to recover your password by entering in your username below. 
-		We will send your password to the email associated with that username:
-        </p>
+        Use this form to recover your password. Simply enter your username below:
+			</p>
         <p>
-        Username: <input type="text" name="Username"><br>
+        Username: <input  id="_inp_TXT" type="text" name="Username"><br>
         </p>
-        <input type="submit">
+		<p>
+				We will send your password to the email associated with that username.</p>
+        <input id="_inp_BTN" type="submit" value="Recover Password">
 		
         </form>
 		<br>
-		<form action="main.php">
-		<button type="submit" formaction="login_form.php">Click here to return to main</button>
+		<form action="login_form.php">
+		<input id="_inp_BTN" type="submit" value="Return to Main Menu">
 		</form>
 		</div>
         </body>

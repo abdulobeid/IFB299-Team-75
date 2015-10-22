@@ -3,9 +3,6 @@
     session_start();
 ?>
 <?php
- ini_set('display_errors',1); 
- error_reporting(E_ALL);
-
 include 'connect.php';
 
 $txtName = $_POST['txtName'];
@@ -17,6 +14,8 @@ $fileType = $_FILES['userfile']['type'];
 $target_dir = "uploads/";
 $target_file = $target_dir . $user . "_" . basename($_FILES['userfile']['name']);
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+$feedStatus = "added " . $fileName . " to the vault.";
+$sqldate = date("Y-m-d H:i:s");
 $conn = db_connect();
 
 if(!get_magic_quotes_gpc())
@@ -32,7 +31,9 @@ if (file_exists($target_file)) {
 	// Check the ability to upload to the server
 	if(move_uploaded_file($_FILES['userfile']['tmp_name'], $target_file)) {
 		$sql = "INSERT INTO tableFiles (userID, columnFileURL, columnName, columnType) VALUES ('$user', '$target_file', '$txtName', '$fileType')";
-		if ($conn->query($sql) === TRUE) {
+		$sql_feed = "INSERT INTO tableFeed (columnUserID, columnStatus, columnDate) VALUES ('$user', '$feedStatus', '$sqldate')";
+		if ($conn->query($sql) === TRUE){
+			$conn->query($sql_feed);
 			$conn->close();
 			echo "<script type='text/javascript'>alert('This file has been successfully uploaded');</script>";
 			header("refresh:0; url=formPopulateFilter.php");

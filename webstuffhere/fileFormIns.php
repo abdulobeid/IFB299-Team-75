@@ -72,58 +72,40 @@ if (isset($_POST['fileID']) && isset($_POST['fileName']) && isset($_POST['fileTy
 		File Type: <attributeThing id="ATT_TYP"> </attributeThing>
 	<p>
 		Date Added: <attributeThing id="ATT_DTE"> </attributeThing>
-		<?php
-		if(isset($_SESSION["userID"]) && $_SESSION["userID"] == 35){ echo '
-	<p>
-		Attached User: <attributeThing id="ATT_USR"> </attributeThing>'; }?>
 	<br>
 	</div>
 	<div id="_div_FTR_BOX_VEW">
 		<input id="_inp_BTN_2" type="submit" onclick= "clicked()" value="View Online">  
 		<input id="_inp_BTN_2" type="submit" onclick=downloadStuff() value="Download">
-	</div>
-	<p>
-		File Editing
-	</p>
+	</div>	
+	
+	
 	<form id="fileForm" action=fileForm.php method=post>
-	<div id="_div_FTR_BOX">
-		Update Filename:
-		<p>
-		<input name="fileName" id="_inp_TXT_2">
-	</div>
-	
-	<div id="_div_FTR_BOX">
-		Update File Color Tag:<p>
-	
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_RED"  onclick="tagColSet('0',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_ORANGE" onclick="tagColSet('1',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_YELLOW" onclick="tagColSet('2',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_GREEN" onclick="tagColSet('3',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_AQUA" onclick="tagColSet('4',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_NAVY" onclick="tagColSet('5',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_PURPLE" onclick="tagColSet('6',this)"></div>
-		<div name="INP_COL" class="_N_SEL" id="_inp_TAG_PINK" onclick="tagColSet('7',this)"></div>
-		<div name="INP_COL" class="_SEL" id="_inp_TAG_NONE" onclick="tagColSet('8',this)"></div>
-		<br><br>
-	</div>
+		<input name="fileName" type="hidden" id="_inp_TXT_2">
 	
 	
 	<input type="hidden" name="fileID" >
 	
 	<input type="hidden" name="fileType" >
-	<input id="_inp_BTN_2" type="submit" value="Save Details"></form>
 	<div id = 'fileId2'></div>	
 	
 	<form id="deleteForm" action=deleteFile.php method=post>
 	<input name="fle_NME" type="hidden">
 	<input name="fle_IDS" type="hidden">
 	<input name="fle_ACT" type="hidden">
-	<input id="_inp_BTN_DELETE" type="submit" onclick=deleteConfirmation() value="Delete File">
 	</form>
 	</div>
 	<iframe id="my_iframe" style="display:none;"></iframe>
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 <script>
 	var UserNames = [];
 <?php

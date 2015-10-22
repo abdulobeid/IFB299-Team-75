@@ -1,0 +1,16 @@
+CREATE TABLE tableFriends
+(
+columnID int NOT NULL,
+columnUserID1 int,
+columnUserID2 int,
+PRIMARY KEY (columnID),
+FOREIGN KEY (columnUserID1) REFERENCES tableUsers(columnID),
+FOREIGN KEY (columnUserID2) REFERENCES tableUsers(columnID)
+)
+
+ALTER TABLE `tableFriends` CHANGE `columnID` `columnID` INT(11) NOT NULL AUTO_INCREMENT;
+
+INSERT INTO `databaseMediaVault`.`tableFriends` (`columnID`, `columnUserID1`, `columnUserID2`) VALUES (NULL, '35', '36');
+
+
+INSERT INTO `databaseMediaVault`.`tableFriends` (`columnID`, `columnUserID1`, `columnUserID2`) VALUES (NULL, '37', '35');

@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href="CSS/mainStyles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
 <?php
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,7 +34,9 @@
     $postEmail    = htmlspecialchars($_POST['Email']);
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+    echo '<div id="_div_REG"><p>
+			<h1>Registration Form</h1>
+			</p>';
     // Validate the Provided Data
     $validated = TRUE;
     
@@ -180,20 +192,14 @@
         VALUES (NULL, '".$postFullName."', '".$postUsername."', '".$postPassword."', '".$postEmail."');";
     
         if ($conn->query($sql) === TRUE) {
-            echo "New user created successfully. Check phpMyAdmin for said record.<br>";
-            
-            echo '
-            <form action="registration_form.php">
-            <button type="submit" formaction="registration_form.php">Add Another User</button>
-            </form>';
-            
+            echo "New user created successfully. Return to the Main Menu to log in.<br>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     } else {
         echo '
         <form action="registration_form.php">
-        <button type="submit" formaction="registration_form.php">Retry</button>
+        <input id="_inp_BTN" type="submit" value="Retry Submitting" >
         </form>';
     }
     
@@ -204,9 +210,11 @@
     $conn->close();
     
 ?>
-
-
+<form action="login_form.php">
+		<br>
+		<input id="_inp_BTN" type="submit" value="Return to Main Menu">
+		</form>
+</div>
 <br>
-<form action="main.php">
-<button type="submit" formaction="main.php">Click here to return to main</button>
-</form>
+</body>
+</html>
