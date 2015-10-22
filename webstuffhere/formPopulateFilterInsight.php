@@ -27,11 +27,11 @@ $retainFilterMM = "";
 $retainFilterYY = "";
 $queryStandIn = " WHERE ";
 
-if(isset($_SESSION["userID"])){
-	if ($_SESSION["userID"] == 35) {
+if(isset($_SESSION["userInsight"])){
+	if ($_SESSION["userInsight"] == 35) {
 		//$queryAdd = $queryAdd . $queryStandIn . "userID = %";
 	} else {
-		$queryAdd = $queryAdd . $queryStandIn . "userID = ".$_SESSION["userID"];
+		$queryAdd = $queryAdd . $queryStandIn . "userID = ".$_SESSION["userInsight"];
 		$queryStandIn = " AND ";
 	}
     
@@ -317,7 +317,7 @@ function mouseClickFile(item) {
 		b = true;
 		 document.getElementsByName(item)[0].id = "_div_FLE_2";
 		 selected = item;
-		 parent.launchFileForm(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected],Users[selected]);
+		 parent.launchFileFormIns(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected],Users[selected]);
 	} else {
 		if (b == true) {
 			b = false;
@@ -370,7 +370,7 @@ function setFileSel(selectedI) {
 	document.getElementsByName(selectedI)[0].id = "_div_FLE_2";
 	selected = selectedI;
 	
-	parent.reloadFileForm(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected],Users[selected]);
+	parent.reloadFileFormIns(Tickers[selected],IDS[selected],Names[selected],Types[selected],Times[selected],Colrs[selected],RNames[selected],Users[selected]);
 }
 </script> 
 

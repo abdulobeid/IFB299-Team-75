@@ -1,3 +1,16 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href="CSS/mainStyles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="_div_REG">
+        <p>
+        <h1>Recovery Form</h1>
+        </p>
+
 <?php
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,10 +53,10 @@
             mail( $itemEmail,"Password Recovery from Media Vault",$messageString);
         }
         
-        echo "Your password has been sent to your nominated email";
+        echo "Your password has been sent to your nominated email address. Have a great day!";
         
     } else {
-        echo 'Username should be in the database.';
+        echo 'Our database indicates that the username you have entered was not found.<br>';
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,9 +66,10 @@
     $conn->close();
     
 ?>
-
-
-<br>
-<form action="main.php">
-<button type="submit" formaction="main.php">Click here to return to main</button>
-</form>
+<p>
+<form action="login_form.php">
+		<input id="_inp_BTN" type="submit" value="Return to Main Menu">
+		</form></p>
+</div>
+        </body>
+        </html>

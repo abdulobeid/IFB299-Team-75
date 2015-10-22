@@ -10,6 +10,8 @@
     echo "<br>";
 ?>
 
+<p><a href = "../index.html">Back<a/><p/>
+
 <form action="login_form.php">
 <button type="submit" formaction="login_form.php">Click here to log in</button>
 </form>
